@@ -85,7 +85,13 @@ server.tool(
   "Validate + save a demo's DemoDocument. On success the change is live on the share link immediately; on failure the validation errors are returned so you can fix and retry.",
   {
     id: z.string().describe("The demo id"),
-    document: z.any().describe("The full, updated DemoDocument object"),
+    // Must be a typed object (not z.any()): an untyped property has no JSON
+    // Schema "type", which makes some MCP clients stringify the value before it
+    // reaches the server. passthrough() keeps the full nested DemoDocument.
+    document: z
+      .object({})
+      .passthrough()
+      .describe("The full, updated DemoDocument object"),
   },
   ({ id, document }) =>
     tool(() => api(`/api/demos/${id}`, { method: "PUT", body: JSON.stringify({ document }) })),
