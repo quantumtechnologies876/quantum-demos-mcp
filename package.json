@@ -1,7 +1,7 @@
 {
   "name": "quantum-demos-mcp",
-  "version": "0.1.1",
-  "description": "MCP server for authoring Quantum customer demos from Claude Code.",
+  "version": "0.2.0",
+  "description": "MCP server for authoring Quantum customer demos and sales proposals from Claude Code.",
   "type": "module",
   "bin": {
     "quantum-demos-mcp": "src/index.js"
